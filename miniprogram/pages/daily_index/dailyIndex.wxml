@@ -1,0 +1,8 @@
+<!--miniprogram/pages/daily_index/dailyIndex.wxml-->
+<view class="container">
+  <view class="uploader">
+    <navigator url="../theme/theme" open-type="navigate" class="uploader-text">
+      <text> 设置每日打卡主题</text>
+    </navigator>
+  </view>
+</view>

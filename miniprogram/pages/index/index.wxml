@@ -55,5 +55,11 @@
     </navigator>
   </view>
 
+  <!-- 打卡demo -->
+  <view class="uploader">
+    <navigator url="../daily_index/dailyIndex" open-type="navigate" class="uploader-text">
+      <text>打卡demo</text>
+    </navigator>
+  </view>
 
 </view>

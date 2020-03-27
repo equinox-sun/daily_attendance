@@ -1,0 +1,14 @@
+/* miniprogram/pages/theme/theme.wxss */
+.calendar {
+	background-color: white;
+	padding-top: 10px;
+	border-radius: 15px
+}
+.header {
+	font-size:large;
+	color:#59518d;
+}
+.board {
+    color: #dddcff;
+    font-weight: bold;
+}
