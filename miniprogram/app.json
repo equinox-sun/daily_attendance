@@ -1,8 +1,8 @@
 {
   "pages": [
+    "pages/index/index",
     "pages/theme/theme",
     "pages/daily_index/dailyIndex",
-    "pages/index/index",
     "pages/userConsole/userConsole",
     "pages/storageConsole/storageConsole",
     "pages/databaseGuide/databaseGuide",
@@ -17,10 +17,10 @@
     "pages/im/room/room",
     "pages/theme_edit/themeEdit"
   ],
-  "plugins":{
-    "calendar":{
-      "version":"1.1.3",
-      "provider":"wx92c68dae5a8bb046"
+  "plugins": {
+    "calendar": {
+      "version": "1.1.3",
+      "provider": "wx92c68dae5a8bb046"
     }
   },
   "window": {

@@ -5,14 +5,54 @@ Page({
     placeholder: '开始输入...',
     editorHeight: 300,
     keyboardHeight: 0,
-    isIOS: false
+    isIOS: false,
+    id:''
   },
   readOnlyChange() {
     this.setData({
       readOnly: !this.data.readOnly
     })
   },
-  onLoad() {
+  onLoad(options) {
+    if(options.date){
+      var theme_date=options.date*1,
+          year =options.date.substr(0,4), 
+          month =options.date.substr(4,2), 
+          day =options.date.substr(6,2);
+    }else{
+      var today_date = new Date(),
+      year=today_date.getFullYear(),
+      month=today_date.getMonth()+1,
+      day=today_date.getDate(),
+      theme_date=year*10000+month*100+day;
+    }
+    var date = year+'-'+month+'-'+day;
+    this.setData({ year, month,day,date,theme_date})
+    console.log(theme_date)
+    const db =wx.cloud.database()
+    db.collection('qd_theme').where({
+      theme_date:theme_date
+    }).get({
+      success: res => {
+        console.log(res.data[0])
+        if(res.data[0]){
+          const d = res.data[0];
+          this.setData({
+            id:d._id
+            // 输出看看
+          })
+          that.editorCtx.setContents({
+            html:d.theme_content,
+            success:  (res)=> {
+             console.log(res)
+            },
+            fail:(res)=> {
+              console.log(res)
+            }
+          }) 
+        }
+      }
+    })
     const platform = wx.getSystemInfoSync().platform
     const isIOS = platform === 'ios'
     this.setData({ isIOS})
@@ -38,7 +78,7 @@ Page({
   updatePosition(keyboardHeight) {
     const toolbarHeight = 50
     const { windowHeight, platform } = wx.getSystemInfoSync()
-    let editorHeight = keyboardHeight > 0 ? (windowHeight - keyboardHeight - toolbarHeight) : windowHeight
+    let editorHeight = (keyboardHeight > 0 ? (windowHeight - keyboardHeight - toolbarHeight) : windowHeight)*0.8
     this.setData({ editorHeight, keyboardHeight })
   },
   calNavigationBarAndStatusBar() {
@@ -85,7 +125,7 @@ Page({
   removeFormat() {
     this.editorCtx.removeFormat()
   },
-  insertDate() {
+  /*insertDate() {
     const date = new Date()
     const formatDate = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`
     this.editorCtx.insertText({
@@ -110,26 +150,45 @@ Page({
         })
       }
     })
-  },
-  
-  // 获取内容
-  clickLogText(e) {
+  },*/
+  submit(e){
     this.editorCtx.getContents({
-      success: function(res) {
-        console.log(res.html)
-        // wx.setStorageSync("content", res.html); // 缓存本地
-        const db =wx.cloud.database()
-        db.collection('qd_theme').add({
-          data:{
-            theme_content:res.html
-
-          },success:res=>{
-            wx.showToast({
-              title: 'success',
-            })
-          }
+      success:res=>{
+        const db = wx.cloud.database()
+        if (this.data.id) {
+          db.collection('qd_theme').doc(this.data.id).update({
+            data:{
+              theme_content:res.html,
+              update_time:db.serverDate(),
+              update_date:new Date()
+            },
+            success: res => {
+              wx.showToast({
+                title:'success'
+              })
+            }
+          })
+        }else{
+          db.collection('qd_theme').add({
+            data:{
+              theme_date:this.data.theme_date,
+              theme_content:res.html,
+              create_time:db.serverDate(),
+              create_date:new Date()
+            },success:res=>{
+              wx.showToast({
+                title:'success'
+              })
+            }
+          })
+        }
+      },
+      fail:err =>{
+        wx.showToast({
+          icon: 'none',
+          title: '请输入内容',
         })
       }
     })
-  },
+  }
 })

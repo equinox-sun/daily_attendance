@@ -1,11 +1,19 @@
 <!--miniprogram/pages/theme/theme.wxml-->
 <view class="container">
-   <view class="uploader">
+   <!-- <view class="uploader">
+
+    <navigator url="../theme_edit/themeEdit?date=20200328" open-type="navigate" class="uploader-text">
+      <text> 新增每日打卡主题</text>
+    </navigator>
     <navigator url="../theme_edit/themeEdit" open-type="navigate" class="uploader-text">
       <text> 新增每日打卡主题</text>
     </navigator>
-  </view>
+  </view> -->
+  <!-- <calendar calendar-style="calendar" header-style="header" board-style="board" binddayClick="dayClick"/>  -->
   <text class="code" wx:if="{{queryTheme}}">{{queryTheme}}</text>
-</view>
 
-  <calendar calendar-style="calendar" header-style="header" board-style="board" binddayClick="dayClick"/>
+  <view>
+  <button></button>
+  <button></button>
+  </view>
+</view>

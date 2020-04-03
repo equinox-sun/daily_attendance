@@ -7,20 +7,25 @@ Page({
    */
   data: {
     openid:'',
-    queryTheme:'',
-    pageSize:4,
-    pageIndex:1
+    queryTheme:''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var today_date = new Date(),
+      year=today_date.getFullYear(),
+      month=today_date.getMonth()+1,
+      day=today_date.getDate(),
+      theme_date=year*10000+month*100+day;
     const db = wx.cloud.database()
-    db.collection('qd_theme').get({
+    db.collection('qd_theme').where({
+      theme_date:theme_date
+    }).get({
       success:res => {
         this.setData({
-          queryTheme:JSON.stringify(res.data, null, 2)
+          queryTheme:JSON.stringify(res.data[0], null, 2)
         })
         console.log('[数据库] [查询记录] 成功: ', res)
       }
