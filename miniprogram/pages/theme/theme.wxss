@@ -1,14 +1,10 @@
 /* miniprogram/pages/theme/theme.wxss */
-.calendar {
-	background-color: white;
-	padding-top: 10px;
-	border-radius: 15px
-}
-.header {
-	font-size:large;
-	color:#59518d;
-}
-.board {
-    color: #dddcff;
-    font-weight: bold;
-}
+.all{width:90%;margin:0 auto;}
+.nav{background-color: #fff;border-radius: 0.6rem;padding: 3rpx 0;}
+.nav .nav-item{position: relative;text-align: center;margin: 10rpx 42rpx; font-size: 24rpx;}
+.nav .nav-item image{width: 32rpx;height:32rpx;}
+.nav .nav-item text{line-height: 40rpx;}
+.theme .theme-item{display: flex;flex-wrap: nowrap;margin:20rpx 0;background-color: #fff;border-radius: 0.8rem;}
+.left{flex:1}
+.right{position: relative; font-size: 14px;color: #888;}
+.theme-text{margin:30rpx}

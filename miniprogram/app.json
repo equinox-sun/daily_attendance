@@ -1,6 +1,6 @@
 {
   "pages": [
-    "pages/index/index",
+    "pages/themeEdit/themeEdit",
     "pages/theme/theme",
     "pages/daily_index/dailyIndex",
     "pages/userConsole/userConsole",
@@ -15,7 +15,8 @@
     "pages/openapi/cloudid/cloudid",
     "pages/im/im",
     "pages/im/room/room",
-    "pages/theme_edit/themeEdit"
+    "pages/index/index",
+    "pages/themeDetail/themeDetail"
   ],
   "plugins": {
     "calendar": {

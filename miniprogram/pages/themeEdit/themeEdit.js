@@ -78,8 +78,9 @@ Page({
   updatePosition(keyboardHeight) {
     const toolbarHeight = 50
     const { windowHeight, platform } = wx.getSystemInfoSync()
-    let editorHeight = (keyboardHeight > 0 ? (windowHeight - keyboardHeight - toolbarHeight) : windowHeight)*0.8
+    let editorHeight = keyboardHeight > 0 ? (windowHeight - keyboardHeight - toolbarHeight) : windowHeight
     this.setData({ editorHeight, keyboardHeight })
+    console.log(keyboardHeight)
   },
   calNavigationBarAndStatusBar() {
     const systemInfo = wx.getSystemInfoSync()
@@ -178,6 +179,9 @@ Page({
             },success:res=>{
               wx.showToast({
                 title:'success'
+              })
+              wx.navigateTo({
+                url: '../theme/theme',
               })
             }
           })

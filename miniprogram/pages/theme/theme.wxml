@@ -1,19 +1,20 @@
 <!--miniprogram/pages/theme/theme.wxml-->
-<view class="container">
-   <!-- <view class="uploader">
-
-    <navigator url="../theme_edit/themeEdit?date=20200328" open-type="navigate" class="uploader-text">
-      <text> 新增每日打卡主题</text>
-    </navigator>
-    <navigator url="../theme_edit/themeEdit" open-type="navigate" class="uploader-text">
-      <text> 新增每日打卡主题</text>
-    </navigator>
-  </view> -->
-  <!-- <calendar calendar-style="calendar" header-style="header" board-style="board" binddayClick="dayClick"/>  -->
-  <text class="code" wx:if="{{queryTheme}}">{{queryTheme}}</text>
-
-  <view>
-  <button></button>
-  <button></button>
-  </view>
+<view class="all">
+    <view class="nav">
+        <view class="nav-item">
+            <picker mode="date" bindchange="bindDateChange">
+		          <image class="icon" src="../../images/add_theme.png"></image>
+              <text> 新增打卡主题</text>
+            </picker>
+        </view>
+    </view>
+    <view class="theme">
+      <navigator wx:for="{{queryTheme}}" wx:key="_id" class="theme-item" url="../themeDetail/themeDetail?id={{item._id}}">
+      <view class="left"><view class="theme-text">{{item.theme_date}}</view><view class="theme-text">{{item.theme_title}}</view></view>
+      <view class="right"><view class="theme-text">未打卡</view></view>
+      </navigator>
+      
+      
+      
+    </view>
 </view>

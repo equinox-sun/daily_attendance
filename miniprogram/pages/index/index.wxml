@@ -1,23 +1,63 @@
 <!--miniprogram/pages/index.wxml-->
 <view>
-	 <view class="calendar">
+    <view class="nav">
+        <view class="nav-item">
+		<image class="icon" src="../../images/calendar.png" title="12321"></image>
+        <text>日历</text>
+        </view>
+        <view class="nav-item">
+		<image class="icon" src="../../images/ranking.png" title="12321"></image>
+        <text>排行版</text>
+        </view>
+        <view class="nav-item">
+		<image class="icon" src="../../images/riqian.png" title="12321"></image>
+        <text>日签</text>
+        </view>
+        <view class="nav-item">
+		<image class="icon" src="../../images/invite.png" title="12321"></image>
+        <text>邀请好友</text>
+        </view>
+    </view>
+    <view class="content">
+        <view class="calendar">
             <view class="flex week-list">
-                  <view class="week-itm" wx:for="{{weekList}}">{{item}}</view>
+                <view class="week-itm" wx:for="{{weekList}}">
+                    {{item}}
+                </view>
             </view>
             <view class="flex days-list">
-                  <view class="day lm" wx:for="{{daysList}}">
-                        <image class="icon"  src="../../images/{{item.day}}.png" title="{{item.date}}" bindtap="changeDay()"></image>
-                        <!-- {{item.day}} -->
-                        {{item.date}}
-                  </view>
-            </view> 
-	</view>
-      <view class="theme">
-       <rich-text nodes="{{queryTheme.theme_content}}"></rich-text>
-      </view>
-      <view>
-            <icon wx:if="{{status == 'success'}}" type="success" size="150"/>
-            <icon wx:elif="{{status == 'waiting'}}" type="waiting" size="150"/>
-            <icon wx:else type="info" size="150"/>
-      </view>
+                <view class="day lm" wx:for="{{daysList}}">
+                    <button wx:if="{{item.date<=currentDate}}" bindtap="onChangeDay" data-date="{{item.date}}" size="mini" type="default" class="{{item.date==chooseDate?'selected':'nomal'}}">
+                        {{item.day}}
+                        <!-- <image class="icon"  src="../../images/{{item.day}}.png" title="{{item.date}}"></image> -->
+                    </button>
+                    <text class="nomal" wx:else>{{item.day}}</text>
+                </view>
+            </view>
+        </view>
+        <view class="theme-header">
+            <view class="left"><image src="../../images/list.png"></image>主题</view>
+            <view class="right"><navigator url="../theme/theme" open-type="navigate">全部主题</navigator></view>
+        </view>
+        <view class="theme-body" wx:if="{{queryTheme}}">
+            <rich-text nodes="{{queryTheme.theme_content}}">
+            </rich-text>
+            <view>
+                <!-- <image class="icon"  wx:if="{{status == 'success'}}" src="../../images/daka_blue.png" title="点击打卡"></image> -->
+                <icon size="150" type="success" wx:if="{{status == 'success'}}">
+                </icon>
+                <icon size="150" type="waiting" wx:elif="{{status == 'waiting'}}">
+                </icon>
+                <icon size="150" type="info" wx:else="">
+                </icon>
+            </view>
+        <button class="punch-btn" data-v-d7756e34="" type="submit">
+            打卡
+        </button>
+        </view>
+        <view wx:else class="theme-no">
+            <image src="../../images/no_record.png"></image>
+            <view>无须打卡</view>
+        </view>
+    </view>
 </view>
